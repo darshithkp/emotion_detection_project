@@ -1,0 +1,3 @@
+'{"emotionPredictions":[{"emotion":{"anger":0.35, "disgust":0.05, "fear":0.02, "joy":0.01, "sad>>> from EmotionDetection.emotion_detection import emotion_detector
+>>> emotion_detector("I hate when this happens")
+'{"emotionPredictions":[{"emotion":{"anger":0.35, "disgust":0.05, "fear":0.02, "joy":0.01, "sadness":0.21}}]}'ness":0.21}}]}'

@@ -1,0 +1,31 @@
+import requests
+import json
+
+def emotion_detector(text_to_analyse):
+    # API URL and Headers
+    url = 'https://sn-watson-emotion.p.cloud.ibm.com/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict'
+    header = {"grpc-metadata-mm-model-id": "emotion_aggregated-workflow_lang_en_stock"}
+    myobj = { "raw_document": { "text": text_to_analyse } }
+    
+    # Send request to Watson NLP
+    response = requests.post(url, json=myobj, headers=header)
+    
+    # Task 3 Formatting Logic:
+    # 1. Parse the response text into a dictionary
+    formatted_response = json.loads(response.text)
+    
+    # 2. Extract the specific emotion scores
+    emotions = formatted_response['emotionPredictions'][0]['emotion']
+    
+    # 3. Use the max() function to find the highest score (dominant emotion)
+    dominant_emotion = max(emotions, key=emotions.get)
+    
+    # 4. Return the final formatted dictionary
+    return {
+        'anger': emotions['anger'],
+        'disgust': emotions['disgust'],
+        'fear': emotions['fear'],
+        'joy': emotions['joy'],
+        'sadness': emotions['sadness'],
+        'dominant_emotion': dominant_emotion
+    }
